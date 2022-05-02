@@ -12,7 +12,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * stack.pop(); // undefined
  *
  */
- module.exports = class Stack {
+class Stack {
    elements = [];
 
   push(element) {
@@ -37,3 +37,7 @@ const { NotImplementedError } = require('../extensions/index.js');
     return element;
   }
 }
+
+module.exports = {
+  Stack
+};

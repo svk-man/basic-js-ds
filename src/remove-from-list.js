@@ -1,5 +1,7 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
+// const { ListNode } = require('../extensions/list-node.js');
+
 /**
  * Given a singly linked list of integers l and an integer k,
  * remove all elements from list l that have a value equal to k.
@@ -12,22 +14,24 @@ const { NotImplementedError } = require('../extensions/index.js');
  * For l = [3, 1, 2, 3, 4, 5] and k = 3,
  * the output should be [1, 2, 4, 5]
  *
- * Singly - linked lists are already defined with this interface
- * function ListNode(x) {
- *   this.value = x;
- *   this.next = null;
+ * Singly - linked lists are already defined using interface
+ * class ListNode {
+ *   constructor(x) {
+ *     this.value = x;
+ *     this.next = null;
+ *   }
  * }
  */
-
-module.exports = function removeKFromList(l, k) {
-  while (indexOf(l, k) !== -1) {
-    l = removeAt(l, indexOf(l, k));
+function removeKFromList(l, k) {
+  let index = indexOf(l, k);
+  while (index !== -1) {
+    l = removeAt(l, index);
+    index = indexOf(l, k)
   }
-  
+
   return l;
 
   function removeAt(l, position) {
-
     if (position < 0 || position > getLength(l)) {
       return;
     }
@@ -45,10 +49,10 @@ module.exports = function removeKFromList(l, k) {
         current = current.next;
         index++;
       }
-      
+
       prev.next = current.next;
     }
-    
+
     return l;
   }
 
@@ -65,11 +69,14 @@ module.exports = function removeKFromList(l, k) {
       index++;
     }
 
+    if (current.value === k) {
+      return index;
+    }
+
     return -1;
   }
 
   function getLength(l) {
-
     if (l.value === null) {
       return 0;
     }
@@ -85,3 +92,7 @@ module.exports = function removeKFromList(l, k) {
     return length;
   }
 }
+
+module.exports = {
+  removeKFromList
+};
